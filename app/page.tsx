@@ -1,69 +1,294 @@
-import Image from "next/image";
+"use client";
+import Link from "next/link";
+import { useProgress } from "@/context/ProgressContext";
 
-export default function Home() {
+const sections = [
+  {
+    href: "/locators",
+    icon: "📌",
+    title: "Locators Lab",
+    desc: "Practice all 10+ Playwright locator strategies on a real e-commerce product page.",
+    badge: "Beginner",
+    topics: ["getByRole", "getByText", "getByLabel", "getByTestId", "filter", "nth"],
+    color: "border-green-400",
+    bgColor: "bg-green-50 dark:bg-green-950/20",
+    badgeColor: "bg-green-100 text-green-700 dark:bg-green-900/50 dark:text-green-300",
+  },
+  {
+    href: "/actions",
+    icon: "🖱️",
+    title: "Actions Arena",
+    desc: "Click, hover, type, scroll and use keyboard shortcuts on interactive product widgets.",
+    badge: "Beginner",
+    topics: ["click", "hover", "fill", "keyboard", "scroll", "pressSequentially"],
+    color: "border-green-400",
+    bgColor: "bg-green-50 dark:bg-green-950/20",
+    badgeColor: "bg-green-100 text-green-700 dark:bg-green-900/50 dark:text-green-300",
+  },
+  {
+    href: "/assertions",
+    icon: "✅",
+    title: "Assertions Studio",
+    desc: "Every expect() matcher demonstrated live — visibility, text, value, count and more.",
+    badge: "Beginner",
+    topics: ["toBeVisible", "toHaveText", "toBeChecked", "toHaveCount", "expect.soft"],
+    color: "border-green-400",
+    bgColor: "bg-green-50 dark:bg-green-950/20",
+    badgeColor: "bg-green-100 text-green-700 dark:bg-green-900/50 dark:text-green-300",
+  },
+  {
+    href: "/forms",
+    icon: "📝",
+    title: "Forms & Inputs",
+    desc: "Complete checkout form with text, radio, checkbox, select, date picker and slider.",
+    badge: "Beginner",
+    topics: ["fill", "check", "selectOption", "setInputFiles", "date picker", "slider"],
+    color: "border-green-400",
+    bgColor: "bg-green-50 dark:bg-green-950/20",
+    badgeColor: "bg-green-100 text-green-700 dark:bg-green-900/50 dark:text-green-300",
+  },
+  {
+    href: "/tables",
+    icon: "📊",
+    title: "Tables & Grids",
+    desc: "Order history table with sort, pagination, filter, inline edit and row selection.",
+    badge: "Intermediate",
+    topics: ["locator chaining", "toHaveCount", "sort assertion", "pagination", "inline edit"],
+    color: "border-blue-400",
+    bgColor: "bg-blue-50 dark:bg-blue-950/20",
+    badgeColor: "bg-blue-100 text-blue-700 dark:bg-blue-900/50 dark:text-blue-300",
+  },
+  {
+    href: "/dialogs",
+    icon: "🪟",
+    title: "Dialogs & Popups",
+    desc: "JS alerts, confirms, prompts, modals, toasts, tooltips and new-tab links.",
+    badge: "Intermediate",
+    topics: ["page.on('dialog')", "modal", "toast", "tooltip", "waitForEvent('page')"],
+    color: "border-blue-400",
+    bgColor: "bg-blue-50 dark:bg-blue-950/20",
+    badgeColor: "bg-blue-100 text-blue-700 dark:bg-blue-900/50 dark:text-blue-300",
+  },
+  {
+    href: "/navigation",
+    icon: "🔀",
+    title: "Navigation & Routing",
+    desc: "Multi-page store navigation, back/forward, redirects, anchors and 404 pages.",
+    badge: "Intermediate",
+    topics: ["goto", "goBack", "waitForURL", "toHaveURL", "new tab"],
+    color: "border-blue-400",
+    bgColor: "bg-blue-50 dark:bg-blue-950/20",
+    badgeColor: "bg-blue-100 text-blue-700 dark:bg-blue-900/50 dark:text-blue-300",
+  },
+  {
+    href: "/network",
+    icon: "🌐",
+    title: "Network & API Mocking",
+    desc: "Intercept real API calls, mock responses, simulate errors and replay HAR files.",
+    badge: "Intermediate",
+    topics: ["page.route", "route.fulfill", "route.abort", "waitForResponse", "HAR"],
+    color: "border-blue-400",
+    bgColor: "bg-blue-50 dark:bg-blue-950/20",
+    badgeColor: "bg-blue-100 text-blue-700 dark:bg-blue-900/50 dark:text-blue-300",
+  },
+  {
+    href: "/files",
+    icon: "📂",
+    title: "File Operations",
+    desc: "Single & multi-file upload, drag-and-drop dropzone and file download handling.",
+    badge: "Intermediate",
+    topics: ["setInputFiles", "filechooser", "waitForEvent('download')"],
+    color: "border-blue-400",
+    bgColor: "bg-blue-50 dark:bg-blue-950/20",
+    badgeColor: "bg-blue-100 text-blue-700 dark:bg-blue-900/50 dark:text-blue-300",
+  },
+  {
+    href: "/frames",
+    icon: "🖼️",
+    title: "Frames & Shadow DOM",
+    desc: "Payment iframe, nested frames, and auto-piercing Shadow DOM custom elements.",
+    badge: "Advanced",
+    topics: ["frameLocator", "nested frames", "Shadow DOM", "web components"],
+    color: "border-purple-400",
+    bgColor: "bg-purple-50 dark:bg-purple-950/20",
+    badgeColor: "bg-purple-100 text-purple-700 dark:bg-purple-900/50 dark:text-purple-300",
+  },
+  {
+    href: "/visual",
+    icon: "🎨",
+    title: "Visual Testing",
+    desc: "Screenshot baselines, pixel diffs, masked regions and PDF generation.",
+    badge: "Advanced",
+    topics: ["toHaveScreenshot", "mask", "maxDiffPixelRatio", "page.pdf"],
+    color: "border-purple-400",
+    bgColor: "bg-purple-50 dark:bg-purple-950/20",
+    badgeColor: "bg-purple-100 text-purple-700 dark:bg-purple-900/50 dark:text-purple-300",
+  },
+  {
+    href: "/accessibility",
+    icon: "♿",
+    title: "Accessibility",
+    desc: "axe-core audit, keyboard navigation, WCAG compliance and ARIA role practice.",
+    badge: "Advanced",
+    topics: ["AxeBuilder", "keyboard nav", "WCAG", "getByRole audit"],
+    color: "border-purple-400",
+    bgColor: "bg-purple-50 dark:bg-purple-950/20",
+    badgeColor: "bg-purple-100 text-purple-700 dark:bg-purple-900/50 dark:text-purple-300",
+  },
+  {
+    href: "/advanced",
+    icon: "⚡",
+    title: "Advanced Topics",
+    desc: "Banking portal: auth state, POM, fixtures, mobile emulation, WebSockets and more.",
+    badge: "Advanced",
+    topics: ["storageState", "POM", "fixtures", "mobile", "WebSocket", "geolocation"],
+    color: "border-purple-400",
+    bgColor: "bg-purple-50 dark:bg-purple-950/20",
+    badgeColor: "bg-purple-100 text-purple-700 dark:bg-purple-900/50 dark:text-purple-300",
+  },
+  {
+    href: "/test-runner",
+    icon: "🧪",
+    title: "Test Runner & Hooks",
+    desc: "beforeAll, beforeEach, describe.serial, skip, fixme, tags (@smoke), and test.step().",
+    badge: "Mastery",
+    topics: ["beforeAll", "afterEach", "test.describe", "skip & fixme", "@tags", "test.step"],
+    color: "border-emerald-500",
+    bgColor: "bg-emerald-50/50 dark:bg-emerald-950/20",
+    badgeColor: "bg-emerald-100 text-emerald-800 dark:bg-emerald-900/50 dark:text-emerald-300",
+  },
+  {
+    href: "/cli-codegen",
+    icon: "⚙️",
+    title: "Codegen & CLI Flags",
+    desc: "playwright codegen, full playwright.config.ts breakdown, and all CLI execution flags.",
+    badge: "Mastery",
+    topics: ["codegen", "config options", "CLI flags", "sharding", "Trace Viewer", "--ui"],
+    color: "border-cyan-500",
+    bgColor: "bg-cyan-50/50 dark:bg-cyan-950/20",
+    badgeColor: "bg-cyan-100 text-cyan-800 dark:bg-cyan-900/50 dark:text-cyan-300",
+  },
+  {
+    href: "/mastery",
+    icon: "🎓",
+    title: "Mastery & Edge Cases",
+    desc: "page.on('console'), page.on('pageerror'), Cookie/GDPR manipulation, and offline simulation.",
+    badge: "Mastery",
+    topics: ["console events", "pageerror", "cookies", "offline mode", "locale emulation"],
+    color: "border-amber-500",
+    bgColor: "bg-amber-50/50 dark:bg-amber-950/20",
+    badgeColor: "bg-amber-100 text-amber-800 dark:bg-amber-900/50 dark:text-amber-300",
+  },
+  {
+    href: "/cheatsheet",
+    icon: "📋",
+    title: "Cheat Sheet",
+    desc: "Quick reference for every Playwright API, CLI command and config option.",
+    badge: "",
+    topics: ["locators", "actions", "assertions", "config", "CLI", "Trace Viewer"],
+    color: "border-gray-300 dark:border-gray-700",
+    bgColor: "bg-gray-50 dark:bg-slate-900",
+    badgeColor: "",
+  },
+];
+
+export default function HomePage() {
+  const { isCompleted, toggleSection, getCompletionPercentage, resetProgress } = useProgress();
+  const percentage = getCompletionPercentage();
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <div className="max-w-6xl mx-auto space-y-6">
+      {/* Hero Banner */}
+      <div className="p-5 sm:p-6 bg-gradient-to-r from-indigo-600 via-indigo-700 to-purple-700 rounded-2xl text-white shadow-md">
+        <div className="flex flex-col md:flex-row items-start justify-between gap-4">
+          <div>
+            <h1 className="text-xl sm:text-2xl font-bold mb-1">🎭 Playwright Practice & Learning Sandbox</h1>
+            <p className="text-indigo-100 text-xs sm:text-sm max-w-xl">
+              Your self-contained automation playground with interactive widgets, mobile support, dark mode, official doc links, and real-time progress tracking.
+            </p>
+          </div>
+          <div className="w-full md:w-auto bg-indigo-900/60 backdrop-blur-xs p-3 rounded-xl border border-indigo-400/20">
+            <div className="flex items-center justify-between gap-4 mb-1.5">
+              <span className="text-xs text-indigo-200">Curriculum Completion:</span>
+              <span className="font-mono font-bold text-emerald-300 text-xs">{percentage}%</span>
+            </div>
+            <div className="w-full md:w-48 bg-indigo-950 rounded-full h-2 overflow-hidden">
+              <div
+                className="bg-emerald-400 h-2 rounded-full transition-all duration-300"
+                style={{ width: `${percentage}%` }}
+              />
+            </div>
+            {percentage > 0 && (
+              <button
+                onClick={resetProgress}
+                className="text-[10px] text-indigo-300 hover:text-white underline mt-2 block"
+              >
+                Reset Progress
+              </button>
+            )}
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+      </div>
+
+      {/* Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {sections.map((s) => {
+          const completed = isCompleted(s.href);
+          return (
+            <div
+              key={s.href}
+              data-testid={`section-card-${s.title.toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "")}`}
+              className={`group relative flex flex-col justify-between border-l-4 ${s.color} ${s.bgColor} rounded-xl p-4 hover:shadow-md transition-all hover:-translate-y-0.5 border border-gray-200/60 dark:border-slate-800`}
+            >
+              <div>
+                <div className="flex items-start justify-between mb-2">
+                  <span className="text-2xl">{s.icon}</span>
+                  <div className="flex items-center gap-2">
+                    {s.href !== "/cheatsheet" && (
+                      <button
+                        onClick={(e) => {
+                          e.preventDefault();
+                          toggleSection(s.href);
+                        }}
+                        className={`text-[11px] px-2 py-0.5 rounded transition-colors ${
+                          completed
+                            ? "bg-emerald-600 text-white font-medium"
+                            : "bg-gray-200 dark:bg-slate-800 text-gray-600 dark:text-gray-400 hover:bg-emerald-100 hover:text-emerald-800"
+                        }`}
+                        title="Mark section completed"
+                      >
+                        {completed ? "✓ Done" : "Mark Done"}
+                      </button>
+                    )}
+                    {s.badge && (
+                      <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${s.badgeColor}`}>
+                        {s.badge}
+                      </span>
+                    )}
+                  </div>
+                </div>
+                <Link href={s.href} className="block">
+                  <h2 className="font-semibold text-gray-800 dark:text-slate-100 mb-1 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors text-sm">
+                    {s.title}
+                  </h2>
+                  <p className="text-xs text-gray-500 dark:text-gray-400 mb-3 leading-relaxed">{s.desc}</p>
+                </Link>
+              </div>
+
+              <div className="flex flex-wrap gap-1 mt-auto pt-2 border-t border-gray-200/40 dark:border-slate-800/60">
+                {s.topics.map((t) => (
+                  <span
+                    key={t}
+                    className="text-[10px] bg-white/80 dark:bg-slate-900 text-gray-600 dark:text-gray-300 px-1.5 py-0.5 rounded font-mono border border-gray-200 dark:border-slate-700"
+                  >
+                    {t}
+                  </span>
+                ))}
+              </div>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }
