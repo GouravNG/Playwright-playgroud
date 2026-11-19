@@ -125,11 +125,6 @@ export default function Sidebar() {
             );
           })}
         </nav>
-
-        <div className="p-3 border-t border-gray-200 dark:border-slate-800 text-[11px] text-gray-500 dark:text-gray-500 text-center flex items-center justify-between px-4">
-          <span className="font-mono">localhost:3000</span>
-          <span className="text-indigo-400 font-semibold">Ready</span>
-        </div>
       </aside>
     </>
   );
