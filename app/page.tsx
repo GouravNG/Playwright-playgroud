@@ -136,6 +136,17 @@ const sections = [
     badgeColor: "bg-purple-100 text-purple-700 dark:bg-purple-900/50 dark:text-purple-300",
   },
   {
+    href: "/slow-loading",
+    icon: "⏳",
+    title: "Slow Loading & Async",
+    desc: "Healthcare diagnostic portal: heavy API latency, skeleton loaders, polling progress and delayed elements.",
+    badge: "Advanced",
+    topics: ["waitForResponse", "auto-waiting", "timeout tuning", "polling", "delayed DOM"],
+    color: "border-teal-400",
+    bgColor: "bg-teal-50 dark:bg-teal-950/20",
+    badgeColor: "bg-teal-100 text-teal-700 dark:bg-teal-900/50 dark:text-teal-300",
+  },
+  {
     href: "/advanced",
     icon: "⚡",
     title: "Advanced Topics",

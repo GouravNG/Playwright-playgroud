@@ -18,6 +18,7 @@ const sections = [
   { href: "/frames", label: "🖼️ Frames & Shadow DOM", badge: "Advanced" },
   { href: "/visual", label: "🎨 Visual Testing", badge: "Advanced" },
   { href: "/accessibility", label: "♿ Accessibility", badge: "Advanced" },
+  { href: "/slow-loading", label: "⏳ Slow Loading & Async", badge: "Advanced" },
   { href: "/advanced", label: "⚡ Advanced Topics", badge: "Advanced" },
   { href: "/test-runner", label: "🧪 Test Runner & Hooks", badge: "Mastery" },
   { href: "/cli-codegen", label: "⚙️ Codegen & CLI Flags", badge: "Mastery" },
