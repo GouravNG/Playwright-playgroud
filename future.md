@@ -4,7 +4,7 @@ This document outlines upcoming frontend scenarios and complex UI patterns plann
 
 ---
 
-## 1. 🤖 Dynamic CAPTCHA & Math Puzzle Sandbox
+## 1. 🤖 Dynamic CAPTCHA & Math Puzzle Sandbox (Completed ✅ - `/captcha`)
 * **Concept:** Interactive security challenges often found in banking and e-commerce portals.
 * **Frontend Components:**
   * Dynamic math questions (e.g., `What is 18 + 7?` generated randomly per session).
@@ -17,7 +17,7 @@ This document outlines upcoming frontend scenarios and complex UI patterns plann
 
 ---
 
-## 2. ↕️ Interactive Kanban Board (Trello-Style Drag-and-Drop)
+## 2. ↕️ Interactive Kanban Board (Trello-Style Drag-and-Drop) (Completed ✅ - `/kanban`)
 * **Concept:** Multi-column project management board with draggable cards.
 * **Frontend Components:**
   * Three status columns: `Backlog`, `In Progress`, and `Done`.
@@ -30,7 +30,7 @@ This document outlines upcoming frontend scenarios and complex UI patterns plann
 
 ---
 
-## 3. ⏱️ Micro-Frontend / Custom Shadow DOM Trees (Closed vs. Open)
+## 3. ⏱️ Micro-Frontend / Custom Shadow DOM Trees (Closed vs. Open) (Completed ✅ - `/shadow-dom`)
 * **Concept:** Modern embedded widgets (similar to Salesforce Lightning, Shopify apps, or Zendesk chat embeds).
 * **Frontend Components:**
   * Open Shadow Root custom element (standard auto-pierced).
@@ -42,7 +42,7 @@ This document outlines upcoming frontend scenarios and complex UI patterns plann
 
 ---
 
-## 4. 🗂️ Hierarchical Accordions & Nested File Tree Explorer
+## 4. 🗂️ Hierarchical Accordions & Nested File Tree Explorer (Completed ✅ - `/file-tree`)
 * **Concept:** Deeply nested directory structures (like AWS S3 browser or VS Code file explorer).
 * **Frontend Components:**
   * Expandable / collapsible multi-level folder nodes.
@@ -55,7 +55,7 @@ This document outlines upcoming frontend scenarios and complex UI patterns plann
 
 ---
 
-## 5. 🔔 Live WebSocket / Server-Sent Events (SSE) Live Feed
+## 5. 🔔 Live WebSocket / Server-Sent Events (SSE) Live Feed (Completed ✅ - `/realtime-feed`)
 * **Concept:** Real-time stock exchange order book or emergency healthcare triage dispatch.
 * **Frontend Components:**
   * Real-time streaming updates pushed without user interaction.
@@ -66,7 +66,7 @@ This document outlines upcoming frontend scenarios and complex UI patterns plann
 
 ---
 
-## 6. 🌐 Multi-Language / Internationalization (i18n) & RTL Layout
+## 6. 🌐 Multi-Language / Internationalization (i18n) & RTL Layout (Completed ✅ - `/i18n`)
 * **Concept:** Global multi-language selector with full Right-to-Left (RTL) mirroring (e.g., Arabic/Hebrew).
 * **Frontend Components:**
   * Language toggle switching between English, German, Japanese, and Arabic (RTL).
