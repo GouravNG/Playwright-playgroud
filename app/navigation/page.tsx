@@ -21,8 +21,8 @@ function WidgetCard({ title, testId, children, hint }: {
   title: string; testId?: string; children: React.ReactNode; hint: string;
 }) {
   return (
-    <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm" data-testid={testId}>
-      <h3 className="font-semibold text-gray-700 text-sm mb-3 border-b pb-2">{title}</h3>
+    <div className="bg-white dark:bg-slate-800 rounded-xl border border-gray-200 dark:border-slate-700 p-5 shadow-sm" data-testid={testId}>
+      <h3 className="font-semibold text-gray-700 dark:text-slate-200 text-sm mb-3 border-b dark:border-slate-700 pb-2">{title}</h3>
       {children}
       <HintPanel code={hint} />
     </div>
@@ -42,9 +42,9 @@ export default function NavigationPage() {
 
   return (
     <div className="max-w-5xl mx-auto space-y-6">
-      <div className="bg-sky-50 border border-sky-200 rounded-xl p-4">
-        <h2 className="font-bold text-sky-800 mb-1">🔀 Navigation & Routing</h2>
-        <p className="text-sm text-sky-700">
+      <div className="bg-sky-50 dark:bg-sky-950/40 border border-sky-200 dark:border-sky-800 rounded-xl p-4">
+        <h2 className="font-bold text-sky-800 dark:text-sky-300 mb-1">🔀 Navigation & Routing</h2>
+        <p className="text-sm text-sky-700 dark:text-sky-400">
           Practice browser navigation methods: <code>page.goto()</code>, <code>page.goBack()</code>, <code>page.goForward()</code>, <code>page.reload()</code>, <code>page.waitForURL()</code>, URL hash anchors, and new window handling.
         </p>
       </div>
@@ -54,7 +54,7 @@ export default function NavigationPage() {
         <WidgetCard title="1. Link Navigation & URL Assertion" testId="widget-link-nav"
           hint={`// Click navigation link and assert URL change\nawait page.getByTestId('link-view-products').click();\nawait expect(page).toHaveURL(/.*\\/navigation\\/products/);\nawait expect(page.getByRole('heading', { name: 'Store Products' })).toBeVisible();`}>
           <div className="space-y-3">
-            <p className="text-sm text-gray-600">Navigate to our store sub-catalogue:</p>
+            <p className="text-sm text-gray-600 dark:text-slate-400">Navigate to our store sub-catalogue:</p>
             <Link
               href="/navigation/products"
               data-testid="link-view-products"
@@ -73,26 +73,26 @@ export default function NavigationPage() {
               <button
                 onClick={() => router.back()}
                 data-testid="btn-history-back"
-                className="text-xs bg-gray-100 hover:bg-gray-200 border border-gray-300 px-3 py-1.5 rounded-lg text-gray-700"
+                className="text-xs bg-gray-100 dark:bg-slate-700 hover:bg-gray-200 dark:hover:bg-slate-600 border border-gray-300 dark:border-slate-600 px-3 py-1.5 rounded-lg text-gray-700 dark:text-slate-200"
               >
                 ← Browser Back
               </button>
               <button
                 onClick={() => router.forward()}
                 data-testid="btn-history-forward"
-                className="text-xs bg-gray-100 hover:bg-gray-200 border border-gray-300 px-3 py-1.5 rounded-lg text-gray-700"
+                className="text-xs bg-gray-100 dark:bg-slate-700 hover:bg-gray-200 dark:hover:bg-slate-600 border border-gray-300 dark:border-slate-600 px-3 py-1.5 rounded-lg text-gray-700 dark:text-slate-200"
               >
                 Browser Forward →
               </button>
               <button
                 onClick={() => window.location.reload()}
                 data-testid="btn-history-reload"
-                className="text-xs bg-gray-100 hover:bg-gray-200 border border-gray-300 px-3 py-1.5 rounded-lg text-gray-700"
+                className="text-xs bg-gray-100 dark:bg-slate-700 hover:bg-gray-200 dark:hover:bg-slate-600 border border-gray-300 dark:border-slate-600 px-3 py-1.5 rounded-lg text-gray-700 dark:text-slate-200"
               >
                 🔄 Reload Page
               </button>
             </div>
-            <p className="text-xs text-gray-400">Can be triggered via buttons or native Playwright page APIs.</p>
+            <p className="text-xs text-gray-400 dark:text-slate-500">Can be triggered via buttons or native Playwright page APIs.</p>
           </div>
         </WidgetCard>
 
@@ -124,23 +124,23 @@ export default function NavigationPage() {
               <a
                 href="#specs"
                 data-testid="link-hash-specs"
-                className="text-xs text-indigo-600 hover:underline border border-indigo-200 bg-indigo-50 px-2.5 py-1 rounded"
+                className="text-xs text-indigo-600 dark:text-indigo-400 hover:underline border border-indigo-200 dark:border-indigo-800 bg-indigo-50 dark:bg-indigo-950/40 px-2.5 py-1 rounded"
               >
                 Jump to #specs
               </a>
               <a
                 href="#faq"
                 data-testid="link-hash-faq"
-                className="text-xs text-indigo-600 hover:underline border border-indigo-200 bg-indigo-50 px-2.5 py-1 rounded"
+                className="text-xs text-indigo-600 dark:text-indigo-400 hover:underline border border-indigo-200 dark:border-indigo-800 bg-indigo-50 dark:bg-indigo-950/40 px-2.5 py-1 rounded"
               >
                 Jump to #faq
               </a>
             </div>
-            <div className="h-28 overflow-y-auto border border-gray-200 rounded p-2 text-xs space-y-4">
-              <div id="specs" className="p-2 bg-gray-50 rounded">
+            <div className="h-28 overflow-y-auto border border-gray-200 dark:border-slate-700 rounded p-2 text-xs space-y-4">
+              <div id="specs" className="p-2 bg-gray-50 dark:bg-slate-700 rounded text-gray-800 dark:text-slate-200">
                 <strong>#specs:</strong> 64GB RAM, Quad-Core Processor, 10Gbps Network interface.
               </div>
-              <div id="faq" className="p-2 bg-gray-50 rounded">
+              <div id="faq" className="p-2 bg-gray-50 dark:bg-slate-700 rounded text-gray-800 dark:text-slate-200">
                 <strong>#faq:</strong> Q: Does it support Playwright? A: Yes, 100% test coverage ready!
               </div>
             </div>
@@ -154,11 +154,11 @@ export default function NavigationPage() {
             <Link
               href="/non-existent-page-xyz"
               data-testid="link-trigger-404"
-              className="text-xs text-red-600 underline font-medium"
+              className="text-xs text-red-600 dark:text-red-400 underline font-medium"
             >
               Visit Broken Route (/non-existent-page-xyz)
             </Link>
-            <p className="text-xs text-gray-500">Test how your automation script asserts 404 HTTP status or 404 UI fallbacks.</p>
+            <p className="text-xs text-gray-500 dark:text-slate-400">Test how your automation script asserts 404 HTTP status or 404 UI fallbacks.</p>
           </div>
         </WidgetCard>
 
@@ -171,11 +171,11 @@ export default function NavigationPage() {
               target="_blank"
               rel="noreferrer"
               data-testid="link-new-window"
-              className="inline-block text-xs bg-gray-800 text-white px-3 py-2 rounded hover:bg-gray-900"
+              className="inline-block text-xs bg-gray-800 dark:bg-slate-700 text-white px-3 py-2 rounded hover:bg-gray-900 dark:hover:bg-slate-600"
             >
               Open Terms & Privacy in New Tab ↗
             </a>
-            <p className="text-xs text-gray-400">Use <code>context.waitForEvent(&apos;page&apos;)</code> to switch automation context.</p>
+            <p className="text-xs text-gray-400 dark:text-slate-500">Use <code>context.waitForEvent(&apos;page&apos;)</code> to switch automation context.</p>
           </div>
         </WidgetCard>
       </div>

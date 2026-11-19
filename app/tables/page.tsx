@@ -31,10 +31,10 @@ const initialOrders: Order[] = [
 const PAGE_SIZE = 4;
 
 const statusColors: Record<string, string> = {
-  Delivered: "bg-green-100 text-green-700",
-  Shipped: "bg-blue-100 text-blue-700",
-  Processing: "bg-yellow-100 text-yellow-700",
-  Cancelled: "bg-red-100 text-red-600",
+  Delivered: "bg-green-100 text-green-700 dark:bg-green-900/50 dark:text-green-300",
+  Shipped: "bg-blue-100 text-blue-700 dark:bg-blue-900/50 dark:text-blue-300",
+  Processing: "bg-yellow-100 text-yellow-700 dark:bg-yellow-900/50 dark:text-yellow-300",
+  Cancelled: "bg-red-100 text-red-600 dark:bg-red-900/50 dark:text-red-300",
 };
 
 export default function TablesPage() {
@@ -103,9 +103,9 @@ export default function TablesPage() {
 
   return (
     <div className="max-w-5xl mx-auto space-y-6">
-      <div className="bg-teal-50 border border-teal-200 rounded-xl p-4">
-        <h2 className="font-bold text-teal-800 mb-1">📊 Tables & Grids</h2>
-        <p className="text-sm text-teal-700">
+      <div className="bg-teal-50 dark:bg-teal-950/40 border border-teal-200 dark:border-teal-800 rounded-xl p-4">
+        <h2 className="font-bold text-teal-800 dark:text-teal-300 mb-1">📊 Tables & Grids</h2>
+        <p className="text-sm text-teal-700 dark:text-teal-400">
           Order History table with sort, filter, pagination, inline edit and row operations.
           Practice row/cell locator chaining, <code>toHaveCount()</code>, and more.
         </p>
@@ -116,7 +116,7 @@ export default function TablesPage() {
         <input data-testid="table-search"
           type="text" placeholder="Search orders…" value={search}
           onChange={(e) => { setSearch(e.target.value); setPage(1); }}
-          className="border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400 w-56"
+          className="border border-gray-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-gray-900 dark:text-slate-100 placeholder:text-gray-400 dark:placeholder:text-slate-500 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400 w-56"
         />
         {selected.size > 0 && (
           <button data-testid="btn-delete-selected" onClick={deleteSelected}
@@ -134,33 +134,33 @@ export default function TablesPage() {
 
       {/* Add Order Modal */}
       {showAdd && (
-        <div className="bg-indigo-50 border border-indigo-200 rounded-xl p-4 space-y-3">
-          <h4 className="font-semibold text-indigo-800 text-sm">Add New Order</h4>
+        <div className="bg-indigo-50 dark:bg-slate-800 border border-indigo-200 dark:border-slate-700 rounded-xl p-4 space-y-3">
+          <h4 className="font-semibold text-indigo-800 dark:text-indigo-300 text-sm">Add New Order</h4>
           <div className="flex flex-wrap gap-3">
             <input data-testid="input-new-product" placeholder="Product name"
               value={newOrder.product} onChange={(e) => setNewOrder((p) => ({ ...p, product: e.target.value }))}
-              className="border border-gray-300 rounded px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400"
+              className="border border-gray-300 dark:border-slate-700 bg-white dark:bg-slate-900 text-gray-900 dark:text-slate-100 placeholder:text-gray-400 dark:placeholder:text-slate-500 rounded px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400"
             />
             <input data-testid="input-new-amount" placeholder="Amount" type="number"
               value={newOrder.amount} onChange={(e) => setNewOrder((p) => ({ ...p, amount: e.target.value }))}
-              className="border border-gray-300 rounded px-3 py-1.5 text-sm w-28 focus:outline-none focus:ring-2 focus:ring-indigo-400"
+              className="border border-gray-300 dark:border-slate-700 bg-white dark:bg-slate-900 text-gray-900 dark:text-slate-100 placeholder:text-gray-400 dark:placeholder:text-slate-500 rounded px-3 py-1.5 text-sm w-28 focus:outline-none focus:ring-2 focus:ring-indigo-400"
             />
             <select data-testid="select-new-status" value={newOrder.status}
               onChange={(e) => setNewOrder((p) => ({ ...p, status: e.target.value }))}
-              className="border border-gray-300 rounded px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400">
+              className="border border-gray-300 dark:border-slate-700 bg-white dark:bg-slate-900 text-gray-900 dark:text-slate-100 rounded px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400">
               <option>Processing</option><option>Shipped</option><option>Delivered</option><option>Cancelled</option>
             </select>
             <button data-testid="btn-confirm-add" onClick={addOrder}
               className="bg-indigo-600 text-white text-xs px-3 py-1.5 rounded hover:bg-indigo-700">Confirm</button>
-            <button onClick={() => setShowAdd(false)} className="text-xs text-gray-500 hover:text-gray-700">Cancel</button>
+            <button onClick={() => setShowAdd(false)} className="text-xs text-gray-500 dark:text-slate-400 hover:text-gray-700 dark:hover:text-slate-200">Cancel</button>
           </div>
         </div>
       )}
 
       {/* Table */}
-      <div className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
+      <div className="bg-white dark:bg-slate-800 rounded-xl border border-gray-200 dark:border-slate-700 shadow-sm overflow-hidden">
         <table className="w-full text-sm" data-testid="orders-table">
-          <thead className="bg-gray-50 border-b border-gray-200">
+          <thead className="bg-gray-50 dark:bg-slate-900/80 border-b border-gray-200 dark:border-slate-700">
             <tr>
               <th className="p-3 text-left w-10">
                 <input type="checkbox" onChange={toggleAll}
@@ -178,41 +178,41 @@ export default function TablesPage() {
                 <th key={key}
                   data-testid={`sort-${key}`}
                   onClick={() => handleSort(key as keyof Order)}
-                  className="p-3 text-left font-semibold text-gray-600 text-xs cursor-pointer hover:bg-gray-100 select-none whitespace-nowrap">
+                  className="p-3 text-left font-semibold text-gray-600 dark:text-slate-300 text-xs cursor-pointer hover:bg-gray-100 dark:hover:bg-slate-800 select-none whitespace-nowrap">
                   {label}<SortIcon col={key as keyof Order} />
                 </th>
               ))}
-              <th className="p-3 text-left font-semibold text-gray-600 text-xs">Notes</th>
-              <th className="p-3 text-left font-semibold text-gray-600 text-xs">Actions</th>
+              <th className="p-3 text-left font-semibold text-gray-600 dark:text-slate-300 text-xs">Notes</th>
+              <th className="p-3 text-left font-semibold text-gray-600 dark:text-slate-300 text-xs">Actions</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-gray-100">
+          <tbody className="divide-y divide-gray-100 dark:divide-slate-700/60">
             {paged.length === 0 ? (
-              <tr><td colSpan={8} className="p-8 text-center text-gray-400 text-sm">No orders found</td></tr>
+              <tr><td colSpan={8} className="p-8 text-center text-gray-400 dark:text-slate-500 text-sm">No orders found</td></tr>
             ) : paged.map((order) => (
               <tr key={order.id} data-testid="table-row"
-                className={`hover:bg-gray-50 transition-colors ${selected.has(order.id) ? "bg-indigo-50" : ""}`}>
+                className={`hover:bg-gray-50 dark:hover:bg-slate-700/50 transition-colors ${selected.has(order.id) ? "bg-indigo-50 dark:bg-indigo-950/40" : ""}`}>
                 <td className="p-3">
                   <input type="checkbox" checked={selected.has(order.id)} onChange={() => toggleSelect(order.id)} className="rounded" />
                 </td>
-                <td className="p-3 font-mono text-xs text-indigo-600">{order.id}</td>
-                <td className="p-3 text-gray-800">{order.product}</td>
-                <td className="p-3 font-semibold text-green-700 cell-amount">${order.amount.toFixed(2)}</td>
+                <td className="p-3 font-mono text-xs text-indigo-600 dark:text-indigo-400">{order.id}</td>
+                <td className="p-3 text-gray-800 dark:text-slate-200">{order.product}</td>
+                <td className="p-3 font-semibold text-green-700 dark:text-green-400 cell-amount">${order.amount.toFixed(2)}</td>
                 <td className="p-3">
-                  <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${statusColors[order.status] || "bg-gray-100"}`}>
+                  <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${statusColors[order.status] || "bg-gray-100 dark:bg-slate-700 dark:text-slate-200"}`}>
                     {order.status}
                   </span>
                 </td>
-                <td className="p-3 text-gray-500 text-xs">{order.date}</td>
-                <td className="p-3 text-xs text-gray-500">
+                <td className="p-3 text-gray-500 dark:text-slate-400 text-xs">{order.date}</td>
+                <td className="p-3 text-xs text-gray-500 dark:text-slate-400">
                   {editingId === order.id ? (
                     <input data-testid={`input-notes-${order.id}`}
                       value={editNotes} onChange={(e) => setEditNotes(e.target.value)}
-                      className="border border-indigo-300 rounded px-2 py-1 text-xs w-32 focus:outline-none focus:ring-1 focus:ring-indigo-400"
+                      className="border border-indigo-300 dark:border-indigo-600 bg-white dark:bg-slate-900 text-gray-900 dark:text-slate-100 rounded px-2 py-1 text-xs w-32 focus:outline-none focus:ring-1 focus:ring-indigo-400"
                       autoFocus
                     />
                   ) : (
-                    <span>{order.notes || <span className="italic text-gray-300">—</span>}</span>
+                    <span>{order.notes || <span className="italic text-gray-300 dark:text-slate-600">—</span>}</span>
                   )}
                 </td>
                 <td className="p-3">
@@ -222,7 +222,7 @@ export default function TablesPage() {
                   ) : (
                     <button data-testid={`btn-edit-${order.id}`}
                       onClick={() => { setEditingId(order.id); setEditNotes(order.notes); }}
-                      className="text-xs text-indigo-600 border border-indigo-200 px-2 py-1 rounded hover:bg-indigo-50">Edit</button>
+                      className="text-xs text-indigo-600 dark:text-indigo-400 border border-indigo-200 dark:border-indigo-800 px-2 py-1 rounded hover:bg-indigo-50 dark:hover:bg-indigo-950/40">Edit</button>
                   )}
                 </td>
               </tr>
@@ -231,26 +231,26 @@ export default function TablesPage() {
         </table>
 
         {/* Pagination */}
-        <div className="flex items-center justify-between px-4 py-3 border-t border-gray-200 bg-gray-50">
-          <div className="text-xs text-gray-500" data-testid="pagination-info">
+        <div className="flex items-center justify-between px-4 py-3 border-t border-gray-200 dark:border-slate-700 bg-gray-50 dark:bg-slate-900/60">
+          <div className="text-xs text-gray-500 dark:text-slate-400" data-testid="pagination-info">
             Showing {Math.min((page - 1) * PAGE_SIZE + 1, sorted.length)}–{Math.min(page * PAGE_SIZE, sorted.length)} of <strong>{sorted.length}</strong> orders
           </div>
           <div className="flex gap-2">
             <button data-testid="btn-prev-page" disabled={page === 1} onClick={() => setPage((p) => p - 1)}
-              className="text-xs px-3 py-1.5 rounded border border-gray-300 disabled:opacity-40 hover:bg-gray-100">← Prev</button>
+              className="text-xs px-3 py-1.5 rounded border border-gray-300 dark:border-slate-700 text-gray-700 dark:text-slate-300 disabled:opacity-40 hover:bg-gray-100 dark:hover:bg-slate-800">← Prev</button>
             {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
               <button key={p} data-testid={`btn-page-${p}`} onClick={() => setPage(p)}
                 className={`text-xs px-3 py-1.5 rounded border transition-colors ${
-                  page === p ? "bg-indigo-600 text-white border-indigo-600" : "border-gray-300 hover:bg-gray-100"
+                  page === p ? "bg-indigo-600 text-white border-indigo-600" : "border-gray-300 dark:border-slate-700 text-gray-700 dark:text-slate-300 hover:bg-gray-100 dark:hover:bg-slate-800"
                 }`}>{p}</button>
             ))}
             <button data-testid="btn-next-page" disabled={page === totalPages} onClick={() => setPage((p) => p + 1)}
-              className="text-xs px-3 py-1.5 rounded border border-gray-300 disabled:opacity-40 hover:bg-gray-100">Next →</button>
+              className="text-xs px-3 py-1.5 rounded border border-gray-300 dark:border-slate-700 text-gray-700 dark:text-slate-300 disabled:opacity-40 hover:bg-gray-100 dark:hover:bg-slate-800">Next →</button>
           </div>
         </div>
       </div>
 
-      <p className="text-xs text-gray-400 text-center">
+      <p className="text-xs text-gray-400 dark:text-slate-500 text-center">
         Total orders: <strong data-testid="total-count">{orders.length}</strong> | Filtered: <strong>{filtered.length}</strong>
       </p>
     </div>

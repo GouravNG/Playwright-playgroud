@@ -5,7 +5,7 @@ function HintPanel({ code }: { code: string }) {
   const [open, setOpen] = useState(false);
   return (
     <div className="mt-3">
-      <button onClick={() => setOpen((v) => !v)} className="text-xs text-indigo-600 hover:underline font-medium">
+      <button onClick={() => setOpen((v) => !v)} className="text-xs text-indigo-600 dark:text-indigo-400 hover:underline font-medium">
         {open ? "🙈 Hide hint" : "💡 Show Playwright code"}
       </button>
       {open && (
@@ -19,8 +19,8 @@ function WidgetCard({ title, testId, children, hint }: {
   title: string; testId?: string; children: React.ReactNode; hint: string;
 }) {
   return (
-    <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm" data-testid={testId}>
-      <h3 className="font-semibold text-gray-700 text-sm mb-3 border-b pb-2">{title}</h3>
+    <div className="bg-white dark:bg-slate-800 rounded-xl border border-gray-200 dark:border-slate-700 dark:border-slate-700 p-5 shadow-sm" data-testid={testId}>
+      <h3 className="font-semibold text-gray-700 dark:text-slate-300 dark:text-slate-200 text-sm mb-3 border-b dark:border-slate-700 pb-2">{title}</h3>
       {children}
       <HintPanel code={hint} />
     </div>
@@ -106,7 +106,7 @@ export default function MasteryPage() {
         <WidgetCard title="1. Console Events (page.on('console'))" testId="widget-console-events"
           hint={`// Catch all browser console messages\nconst messages: string[] = [];\npage.on('console', msg => messages.push(\`[\${msg.type()}] \${msg.text()}\`));\n\nawait page.getByTestId('btn-emit-log').click();\nawait page.getByTestId('btn-emit-warn').click();\n\nexpect(messages).toContain('[log] [Playwright Lab] Standard informational log message emitted.');\nexpect(messages).toContain('[warning] [Playwright Lab] Warning: Deprecated payment algorithm requested.');`}>
           <div className="space-y-3">
-            <p className="text-xs text-gray-600">
+            <p className="text-xs text-gray-600 dark:text-slate-400">
               Trigger browser console messages to test your Playwright log listeners and warning detectors:
             </p>
             <div className="flex gap-2">
@@ -133,7 +133,7 @@ export default function MasteryPage() {
         <WidgetCard title="2. Uncaught JS Exceptions (page.on('pageerror'))" testId="widget-pageerror-events"
           hint={`// Listen for unhandled errors\nconst errorPromise = page.waitForEvent('pageerror');\nawait page.getByTestId('btn-throw-error').click();\nconst error = await errorPromise;\nexpect(error.message).toContain('CRITICAL_SIMULATED_EXCEPTION');`}>
           <div className="space-y-3">
-            <p className="text-xs text-gray-600">
+            <p className="text-xs text-gray-600 dark:text-slate-400">
               Verify your test framework catches unhandled exceptions thrown anywhere in browser scripts:
             </p>
             <button
@@ -154,9 +154,9 @@ export default function MasteryPage() {
           hint={`// Set cookie before navigation to bypass banners\nawait context.addCookies([{\n  name: 'gdpr_consent',\n  value: 'true',\n  domain: 'localhost',\n  path: '/',\n}]);\nawait page.reload();\nawait expect(page.getByTestId('cookie-banner')).toBeHidden();\n\n// Read all active cookies\nconst cookies = await context.cookies();`}>
           <div className="space-y-3">
             {!cookieConsent ? (
-              <div data-testid="cookie-banner" className="p-3 bg-amber-50 border border-amber-300 rounded-lg space-y-2">
-                <span className="text-xs font-semibold text-amber-800">🍪 Cookie & GDPR Consent Required</span>
-                <p className="text-[11px] text-amber-700">We use cookies to personalize banking sessions.</p>
+              <div data-testid="cookie-banner" className="p-3 bg-amber-50 dark:bg-amber-950/40 border border-amber-300 dark:border-amber-800 rounded-lg space-y-2">
+                <span className="text-xs font-semibold text-amber-800 dark:text-amber-300">🍪 Cookie & GDPR Consent Required</span>
+                <p className="text-[11px] text-amber-700 dark:text-amber-400">We use cookies to personalize banking sessions.</p>
                 <button
                   onClick={setManualCookie}
                   data-testid="btn-accept-cookies"
@@ -166,8 +166,8 @@ export default function MasteryPage() {
                 </button>
               </div>
             ) : (
-              <div data-testid="cookie-status-accepted" className="p-3 bg-emerald-50 border border-emerald-300 rounded-lg flex justify-between items-center">
-                <span className="text-xs font-medium text-emerald-700">✓ GDPR Cookie Set (Banner Bypassed)</span>
+              <div data-testid="cookie-status-accepted" className="p-3 bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-300 dark:border-emerald-800 rounded-lg flex justify-between items-center">
+                <span className="text-xs font-medium text-emerald-700 dark:text-emerald-300">✓ GDPR Cookie Set (Banner Bypassed)</span>
                 <button
                   onClick={clearManualCookie}
                   data-testid="btn-clear-cookies"
@@ -178,7 +178,7 @@ export default function MasteryPage() {
               </div>
             )}
             {sessionToken && (
-              <div className="text-[11px] font-mono text-gray-500 bg-gray-50 p-1.5 rounded">
+              <div className="text-[11px] font-mono text-gray-500 bg-gray-50 dark:bg-slate-900 p-1.5 rounded">
                 session_token: {sessionToken}
               </div>
             )}
@@ -189,15 +189,15 @@ export default function MasteryPage() {
         <WidgetCard title="4. Offline Simulation (context.setOffline)" testId="widget-offline-simulation"
           hint={`// Disconnect network\nawait context.setOffline(true);\nawait expect(page.getByTestId('network-status-indicator')).toHaveText('Offline');\n\n// Reconnect network\nawait context.setOffline(false);\nawait expect(page.getByTestId('network-status-indicator')).toHaveText('Online');`}>
           <div className="space-y-3">
-            <p className="text-xs text-gray-600">
+            <p className="text-xs text-gray-600 dark:text-slate-400">
               Test progressive web apps or offline UI banners when connection is severed:
             </p>
             <div className="flex items-center gap-3">
-              <span className="text-xs text-gray-700">Connection State:</span>
+              <span className="text-xs text-gray-700 dark:text-slate-300">Connection State:</span>
               <span
                 data-testid="network-status-indicator"
                 className={`text-xs px-2.5 py-0.5 rounded-full font-bold ${
-                  isOnline ? "bg-emerald-100 text-emerald-700" : "bg-red-100 text-red-700 animate-pulse"
+                  isOnline ? "bg-emerald-100 text-emerald-700 dark:text-emerald-300" : "bg-red-100 text-red-700 animate-pulse"
                 }`}
               >
                 {isOnline ? "Online" : "Offline"}
@@ -215,19 +215,19 @@ export default function MasteryPage() {
         <WidgetCard title="5. Locale & Timezone Emulation" testId="widget-locale-emulation"
           hint={`// In playwright.config.ts or test context:\ntest.use({\n  locale: 'de-DE',\n  timezoneId: 'Europe/Berlin',\n});\n// Format changes automatically to: '1.250,50 $' or German date conventions`}>
           <div className="space-y-2">
-            <p className="text-xs text-gray-600">
+            <p className="text-xs text-gray-600 dark:text-slate-400">
               Internationalization formatting rendered according to browser context locale:
             </p>
-            <div className="p-3 bg-gray-50 rounded-lg border text-xs space-y-1.5">
+            <div className="p-3 bg-gray-50 dark:bg-slate-900 rounded-lg border text-xs space-y-1.5">
               <div className="flex justify-between">
                 <span className="text-gray-500">Local Currency Format:</span>
-                <span data-testid="text-locale-currency" className="font-mono font-bold text-gray-800">
+                <span data-testid="text-locale-currency" className="font-mono font-bold text-gray-800 dark:text-slate-100">
                   {currencyDisplay}
                 </span>
               </div>
               <div className="flex justify-between">
                 <span className="text-gray-500">Local Date Format:</span>
-                <span data-testid="text-locale-date" className="font-mono font-bold text-gray-800">
+                <span data-testid="text-locale-date" className="font-mono font-bold text-gray-800 dark:text-slate-100">
                   {dateFormatDisplay}
                 </span>
               </div>
@@ -238,11 +238,11 @@ export default function MasteryPage() {
         {/* Custom Fixtures Architecture */}
         <WidgetCard title="6. Custom Fixtures Architecture" testId="widget-custom-fixtures"
           hint={`// test.extend allows creating reusable dependencies:\nimport { test as base } from '@playwright/test';\n\ntype MyFixtures = { authenticatedPage: Page };\nexport const test = base.extend<MyFixtures>({\n  authenticatedPage: async ({ page }, use) => {\n    await page.goto('/advanced');\n    await page.getByTestId('input-bank-username').fill('admin');\n    await page.getByTestId('input-bank-password').fill('pass');\n    await page.getByTestId('btn-bank-login').click();\n    await use(page); // Provide to test\n    // Teardown code runs here\n  },\n});`}>
-          <div className="space-y-2 text-xs text-gray-600">
+          <div className="space-y-2 text-xs text-gray-600 dark:text-slate-400">
             <p>
               Custom fixtures wrap setup, data seeding, and teardown cleanly so individual tests stay minimal and focused.
             </p>
-            <div className="p-2 bg-gray-100 rounded text-gray-700 font-mono text-[11px]">
+            <div className="p-2 bg-gray-100 dark:bg-slate-800 rounded text-gray-700 dark:text-slate-300 font-mono text-[11px]">
               test(&apos;my test&apos;, async ({`{ authenticatedPage }`}) =&gt; {`{ ... }`});
             </div>
           </div>

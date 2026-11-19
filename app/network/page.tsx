@@ -5,7 +5,7 @@ function HintPanel({ code }: { code: string }) {
   const [open, setOpen] = useState(false);
   return (
     <div className="mt-3">
-      <button onClick={() => setOpen((v) => !v)} className="text-xs text-indigo-600 hover:underline font-medium">
+      <button onClick={() => setOpen((v) => !v)} className="text-xs text-indigo-600 dark:text-indigo-400 hover:underline font-medium">
         {open ? "🙈 Hide hint" : "💡 Show Playwright code"}
       </button>
       {open && (
@@ -19,8 +19,8 @@ function WidgetCard({ title, testId, children, hint }: {
   title: string; testId?: string; children: React.ReactNode; hint: string;
 }) {
   return (
-    <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm" data-testid={testId}>
-      <h3 className="font-semibold text-gray-700 text-sm mb-3 border-b pb-2">{title}</h3>
+    <div className="bg-white dark:bg-slate-800 rounded-xl border border-gray-200 dark:border-slate-700 p-5 shadow-sm" data-testid={testId}>
+      <h3 className="font-semibold text-gray-700 dark:text-slate-200 text-sm mb-3 border-b dark:border-slate-700 pb-2">{title}</h3>
       {children}
       <HintPanel code={hint} />
     </div>
@@ -94,9 +94,9 @@ export default function NetworkPage() {
 
   return (
     <div className="max-w-5xl mx-auto space-y-6">
-      <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-4">
-        <h2 className="font-bold text-emerald-800 mb-1">🌐 Network Interception & API Mocking</h2>
-        <p className="text-sm text-emerald-700">
+      <div className="bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 rounded-xl p-4">
+        <h2 className="font-bold text-emerald-800 dark:text-emerald-300 mb-1">🌐 Network Interception & API Mocking</h2>
+        <p className="text-sm text-emerald-700 dark:text-emerald-400">
           Practice <code>page.route()</code>, fulfilling synthetic responses (<code>route.fulfill()</code>), simulating 500/401 errors, modifying request headers, and aborting assets (<code>route.abort()</code>).
         </p>
       </div>
@@ -113,14 +113,14 @@ export default function NetworkPage() {
             >
               Execute GET /api/products
             </button>
-            <div data-testid="fetch-status-banner" className={`text-xs p-2 rounded ${hasError ? "bg-red-50 text-red-600 border border-red-200" : "bg-gray-50 text-gray-700 border"}`}>
+            <div data-testid="fetch-status-banner" className={`text-xs p-2 rounded ${hasError ? "bg-red-50 dark:bg-red-950/40 text-red-600 dark:text-red-400 border border-red-200 dark:border-red-800" : "bg-gray-50 dark:bg-slate-700 text-gray-700 dark:text-slate-200 border border-gray-200 dark:border-slate-600"}`}>
               {statusText}
             </div>
             <div className="space-y-1.5 max-h-36 overflow-y-auto" data-testid="product-results-list">
               {products.map((p) => (
-                <div key={p.id} className="text-xs p-2 bg-white border rounded flex justify-between items-center" data-testid="product-item">
-                  <span className="font-medium text-gray-800">{p.name}</span>
-                  <span className="font-semibold text-green-700">${p.price}</span>
+                <div key={p.id} className="text-xs p-2 bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded flex justify-between items-center" data-testid="product-item">
+                  <span className="font-medium text-gray-800 dark:text-slate-200">{p.name}</span>
+                  <span className="font-semibold text-green-700 dark:text-green-400">${p.price}</span>
                 </div>
               ))}
             </div>
@@ -131,10 +131,10 @@ export default function NetworkPage() {
         <WidgetCard title="2. Simulate 500 / Network Failures" testId="widget-mock-500"
           hint={`// Mock 500 Internal Server Error\nawait page.route('**/api/products', route => {\n  route.fulfill({ status: 500, body: JSON.stringify({ error: 'Server crashed' }) });\n});\nawait page.getByTestId('btn-fetch-products').click();\nawait expect(page.getByTestId('fetch-status-banner')).toContainText('500');`}>
           <div className="space-y-2">
-            <p className="text-xs text-gray-600">
+            <p className="text-xs text-gray-600 dark:text-slate-400">
               Trigger <code>fetchProducts()</code> while setting up a Playwright route that returns status 500 or aborts connection to assert robust UI error boundaries.
             </p>
-            <div className="p-2.5 bg-amber-50 border border-amber-200 text-amber-800 text-xs rounded">
+            <div className="p-2.5 bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800 text-amber-800 dark:text-amber-300 text-xs rounded">
               💡 Playwright: <code>await route.abort(&apos;failed&apos;);</code>
             </div>
           </div>
@@ -167,20 +167,20 @@ export default function NetworkPage() {
               <button
                 onClick={() => fetchTransactions(false)}
                 data-testid="btn-fetch-tx-noauth"
-                className="text-xs bg-red-100 hover:bg-red-200 text-red-700 border border-red-300 px-2.5 py-1.5 rounded"
+                className="text-xs bg-red-100 dark:bg-red-950/40 hover:bg-red-200 dark:hover:bg-red-900/60 text-red-700 dark:text-red-300 border border-red-300 dark:border-red-800 px-2.5 py-1.5 rounded"
               >
                 Send without Auth (Expect 401)
               </button>
               <button
                 onClick={() => fetchTransactions(true)}
                 data-testid="btn-fetch-tx-auth"
-                className="text-xs bg-indigo-50 hover:bg-indigo-100 text-indigo-700 border border-indigo-200 px-2.5 py-1.5 rounded"
+                className="text-xs bg-indigo-50 dark:bg-indigo-950/40 hover:bg-indigo-100 dark:hover:bg-indigo-900/60 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800 px-2.5 py-1.5 rounded"
               >
                 Send with Bearer Header
               </button>
             </div>
             {bankError && (
-              <div data-testid="bank-error-box" className="text-xs p-2 bg-red-50 text-red-600 rounded border border-red-200">
+              <div data-testid="bank-error-box" className="text-xs p-2 bg-red-50 dark:bg-red-950/40 text-red-600 dark:text-red-400 rounded border border-red-200 dark:border-red-800">
                 ⚠️ {bankError}
               </div>
             )}
@@ -204,7 +204,7 @@ export default function NetworkPage() {
               Load Heavy Promo Image
             </button>
             {imageVisible && (
-              <div className="p-2 border rounded-lg bg-gray-50 flex items-center justify-center">
+              <div className="p-2 border border-gray-200 dark:border-slate-700 rounded-lg bg-gray-50 dark:bg-slate-800 flex items-center justify-center">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src="https://placehold.co/400x120.png?text=Special+Promotion+Banner"
@@ -220,11 +220,11 @@ export default function NetworkPage() {
         {/* HAR Recording & Replay */}
         <WidgetCard title="6. HAR Replay Simulation" testId="widget-har-record"
           hint={`// Replay network traffic directly from recorded HAR\nawait page.routeFromHAR('tests/fixtures/network-dump.har', {\n  url: '**/api/**',\n  update: false,\n});`}>
-          <div className="space-y-2 text-xs text-gray-600">
+          <div className="space-y-2 text-xs text-gray-600 dark:text-slate-400">
             <p>
               Playwright supports record-and-replay using HTTP Archive (HAR) files without needing a live backend running.
             </p>
-            <div className="font-mono bg-gray-100 p-2 rounded text-[11px]">
+            <div className="font-mono bg-gray-100 dark:bg-slate-800 text-gray-800 dark:text-slate-200 border border-gray-200 dark:border-slate-700 p-2 rounded text-[11px]">
               npx playwright open --save-har=network.har http://localhost:3000/network
             </div>
           </div>

@@ -5,7 +5,7 @@ function HintPanel({ code }: { code: string }) {
   const [open, setOpen] = useState(false);
   return (
     <div className="mt-3">
-      <button onClick={() => setOpen((v) => !v)} className="text-xs text-indigo-600 hover:underline font-medium">
+      <button onClick={() => setOpen((v) => !v)} className="text-xs text-indigo-600 dark:text-indigo-400 hover:underline font-medium">
         {open ? "🙈 Hide hint" : "💡 Show Playwright code"}
       </button>
       {open && (
@@ -19,8 +19,8 @@ function WidgetCard({ title, testId, children, hint }: {
   title: string; testId?: string; children: React.ReactNode; hint: string;
 }) {
   return (
-    <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm" data-testid={testId}>
-      <h3 className="font-semibold text-gray-700 text-sm mb-3 border-b pb-2">{title}</h3>
+    <div className="bg-white dark:bg-slate-800 rounded-xl border border-gray-200 dark:border-slate-700 p-5 shadow-sm" data-testid={testId}>
+      <h3 className="font-semibold text-gray-700 dark:text-slate-200 text-sm mb-3 border-b dark:border-slate-700 pb-2">{title}</h3>
       {children}
       <HintPanel code={hint} />
     </div>
@@ -39,9 +39,9 @@ export default function ActionsPage() {
 
   return (
     <div className="max-w-5xl mx-auto space-y-6">
-      <div className="bg-orange-50 border border-orange-200 rounded-xl p-4">
-        <h2 className="font-bold text-orange-800 mb-1">🖱️ Actions Arena</h2>
-        <p className="text-sm text-orange-600">
+      <div className="bg-orange-50 dark:bg-orange-950/40 border border-orange-200 dark:border-orange-800 rounded-xl p-4">
+        <h2 className="font-bold text-orange-800 dark:text-orange-300 mb-1">🖱️ Actions Arena</h2>
+        <p className="text-sm text-orange-600 dark:text-orange-400">
           Practice every Playwright action. The <strong>Event Log</strong> below shows what triggered. Each widget focuses on one action type.
         </p>
       </div>
@@ -69,12 +69,12 @@ export default function ActionsPage() {
             </button>
             <button data-testid="btn-dblclick"
               onDoubleClick={() => addLog("dblclick() → Quick Edit triggered")}
-              className="border border-gray-300 text-sm px-4 py-2 rounded-lg hover:bg-gray-50 text-gray-700">
+              className="border border-gray-300 dark:border-slate-700 text-sm px-4 py-2 rounded-lg hover:bg-gray-50 dark:hover:bg-slate-700 text-gray-700 dark:text-slate-200">
               Double-click to edit
             </button>
             <button data-testid="btn-rightclick"
               onContextMenu={(e) => { e.preventDefault(); addLog("right-click → context menu triggered"); }}
-              className="border border-gray-300 text-sm px-4 py-2 rounded-lg hover:bg-gray-50 text-gray-700">
+              className="border border-gray-300 dark:border-slate-700 text-sm px-4 py-2 rounded-lg hover:bg-gray-50 dark:hover:bg-slate-700 text-gray-700 dark:text-slate-200">
               Right-click me
             </button>
           </div>
@@ -87,14 +87,14 @@ export default function ActionsPage() {
             onMouseEnter={() => { setHovered(true); addLog("hover() → Quick View panel revealed"); }}
             onMouseLeave={() => setHovered(false)}>
             <div data-testid="product-hover-target"
-              className="border-2 border-dashed border-gray-300 rounded-lg p-4 text-sm text-gray-500 cursor-pointer hover:border-indigo-400 transition-colors">
+              className="border-2 border-dashed border-gray-300 dark:border-slate-600 rounded-lg p-4 text-sm text-gray-500 dark:text-slate-400 cursor-pointer hover:border-indigo-400 transition-colors">
               🎧 Hover over this product card
             </div>
             {hovered && (
               <div data-testid="quick-view-panel"
-                className="absolute left-0 top-full mt-1 bg-white border border-indigo-200 rounded-lg shadow-lg p-3 z-10 w-full text-sm">
-                <div className="font-medium text-indigo-700">Quick View</div>
-                <div className="text-gray-600 text-xs mt-1">Wireless Headphones — $79.99</div>
+                className="absolute left-0 top-full mt-1 bg-white dark:bg-slate-800 border border-indigo-200 dark:border-indigo-800 rounded-lg shadow-lg p-3 z-10 w-full text-sm">
+                <div className="font-medium text-indigo-700 dark:text-indigo-300">Quick View</div>
+                <div className="text-gray-600 dark:text-slate-400 text-xs mt-1">Wireless Headphones — $79.99</div>
                 <button className="mt-2 text-xs bg-indigo-600 text-white px-2 py-1 rounded">Add to Cart</button>
               </div>
             )}
@@ -110,10 +110,10 @@ export default function ActionsPage() {
                 if (e.ctrlKey || e.metaKey) addLog("Ctrl+click() → opens in new tab (simulated)");
                 else addLog("click() → normal navigation");
               }}
-              className="text-sm text-indigo-600 underline cursor-pointer block">
+              className="text-sm text-indigo-600 dark:text-indigo-400 underline cursor-pointer block">
               Open Product Detail (try Ctrl+Click)
             </button>
-            <p className="text-xs text-gray-400">Hold Ctrl while clicking to simulate <code>modifiers: [&apos;Control&apos;]</code></p>
+            <p className="text-xs text-gray-400 dark:text-slate-500">Hold Ctrl while clicking to simulate <code>modifiers: [&apos;Control&apos;]</code></p>
           </div>
         </WidgetCard>
 
@@ -132,9 +132,9 @@ export default function ActionsPage() {
                 if (e.key === "Escape") addLog("keyboard.press('Escape') → Dismissed");
                 if (e.key === "Enter") addLog("keyboard.press('Enter') → Submitted");
               }}
-              className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400"
+              className="w-full border border-gray-300 dark:border-slate-700 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400 bg-white dark:bg-slate-800 text-gray-900 dark:text-slate-100 placeholder:text-gray-400 dark:placeholder:text-slate-500"
             />
-            <p className="text-xs text-gray-400">Try: Ctrl+K, Escape, Enter</p>
+            <p className="text-xs text-gray-400 dark:text-slate-500">Try: Ctrl+K, Escape, Enter</p>
           </div>
         </WidgetCard>
 
@@ -142,18 +142,18 @@ export default function ActionsPage() {
         <WidgetCard title="5. pressSequentially() — Realistic typing" testId="widget-press-sequentially"
           hint={`// Simulates real keystroke delays (good for autocomplete)\nawait page.getByLabel('Promo Code').pressSequentially('SAVE10', { delay: 80 });\nawait expect(page.getByLabel('Promo Code')).toHaveValue('SAVE10');`}>
           <div className="space-y-2">
-            <label className="text-sm text-gray-600 font-medium block" htmlFor="promo-code">Promo Code</label>
+            <label className="text-sm text-gray-600 dark:text-slate-400 font-medium block" htmlFor="promo-code">Promo Code</label>
             <div className="flex gap-2">
               <input id="promo-code" ref={promoRef}
                 type="text" value={inputVal} onChange={(e) => setInputVal(e.target.value)}
                 placeholder="Type a promo code…"
-                className="flex-1 border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400"
+                className="flex-1 border border-gray-300 dark:border-slate-700 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400 bg-white dark:bg-slate-800 text-gray-900 dark:text-slate-100 placeholder:text-gray-400 dark:placeholder:text-slate-500"
               />
               <button onClick={() => {
                 addLog(`pressSequentially() → typed '${inputVal || "SAVE10"}'`);
               }} className="text-xs bg-green-600 text-white px-3 py-2 rounded-lg">Apply</button>
             </div>
-            <p className="text-xs text-gray-400">With <code>pressSequentially</code> each keystroke fires individually (80ms delay)</p>
+            <p className="text-xs text-gray-400 dark:text-slate-500">With <code>pressSequentially</code> each keystroke fires individually (80ms delay)</p>
           </div>
         </WidgetCard>
 
@@ -168,11 +168,11 @@ export default function ActionsPage() {
             }} className="bg-indigo-600 text-white text-sm px-4 py-2 rounded-lg hover:bg-indigo-700">
               Scroll to Related Products ↓
             </button>
-            <div className="max-h-20 overflow-y-auto border border-gray-200 rounded p-2">
+            <div className="max-h-20 overflow-y-auto border border-gray-200 dark:border-slate-700 rounded p-2">
               <div className="h-16 flex items-end">
                 <div ref={relatedRef} data-testid="related-products"
                   className={`w-full text-xs text-center py-2 rounded transition-colors ${
-                    scrolled ? "bg-green-100 text-green-700 border border-green-300" : "bg-gray-100 text-gray-500"
+                    scrolled ? "bg-green-100 dark:bg-green-950/40 text-green-700 dark:text-green-400 border border-green-300 dark:border-green-800" : "bg-gray-100 dark:bg-slate-700 text-gray-500 dark:text-slate-400"
                   }`}>
                   📦 Related Products Section {scrolled ? "✓ Scrolled into view!" : ""}
                 </div>
@@ -190,9 +190,9 @@ export default function ActionsPage() {
               placeholder="Email address"
               onFocus={() => addLog("focus() → Email field focused")}
               onBlur={() => addLog("blur() → Email field blurred")}
-              className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400"
+              className="w-full border border-gray-300 dark:border-slate-700 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400 bg-white dark:bg-slate-800 text-gray-900 dark:text-slate-100 placeholder:text-gray-400 dark:placeholder:text-slate-500"
             />
-            <p className="text-xs text-gray-400" data-testid="focus-hint">↑ Click in and out to trigger focus/blur events</p>
+            <p className="text-xs text-gray-400 dark:text-slate-500" data-testid="focus-hint">↑ Click in and out to trigger focus/blur events</p>
           </div>
         </WidgetCard>
 
@@ -200,11 +200,11 @@ export default function ActionsPage() {
         <WidgetCard title="8. keyboard.type() — Type text" testId="widget-keyboard-type"
           hint={`// Type text at current cursor position\nawait page.getByTestId('review-input').click();\nawait page.keyboard.type('Great product! Fast delivery.');\nawait expect(page.getByTestId('review-input')).toHaveValue('Great product! Fast delivery.');`}>
           <div className="space-y-2">
-            <label className="text-sm text-gray-600 font-medium block" htmlFor="review-input">Write a Review</label>
+            <label className="text-sm text-gray-600 dark:text-slate-400 font-medium block" htmlFor="review-input">Write a Review</label>
             <textarea id="review-input" data-testid="review-input"
               placeholder="Your review…"
               rows={3}
-              className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400 resize-none"
+              className="w-full border border-gray-300 dark:border-slate-700 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400 resize-none bg-white dark:bg-slate-800 text-gray-900 dark:text-slate-100 placeholder:text-gray-400 dark:placeholder:text-slate-500"
               onChange={(e) => { if (e.target.value) addLog(`keyboard.type() → typed ${e.target.value.length} chars`); }}
             />
           </div>

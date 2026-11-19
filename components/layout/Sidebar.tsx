@@ -55,23 +55,23 @@ export default function Sidebar() {
         data-testid="app-sidebar"
         className={`
           fixed md:static inset-y-0 left-0 z-50
-          w-64 bg-gray-900 dark:bg-slate-900 text-white flex flex-col h-full overflow-y-auto shrink-0
-          transition-transform duration-200 ease-in-out border-r border-gray-800 dark:border-slate-800
+          w-64 bg-gray-100 dark:bg-slate-900 text-gray-900 dark:text-white flex flex-col h-full overflow-y-auto shrink-0
+          transition-transform duration-200 ease-in-out border-r border-gray-200 dark:border-slate-800
           ${mobileMenuOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"}
         `}
       >
-        <div className="p-4 border-b border-gray-800 dark:border-slate-800 flex items-center justify-between">
+        <div className="p-4 border-b border-gray-200 dark:border-slate-800 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <span className="text-2xl">🎭</span>
             <div>
-              <div className="font-bold text-sm leading-tight text-white">Playwright</div>
-              <div className="text-xs text-indigo-400">Practice & Reference</div>
+              <div className="font-bold text-sm leading-tight text-gray-900 dark:text-white">Playwright</div>
+              <div className="text-xs text-indigo-600 dark:text-indigo-400">Practice & Reference</div>
             </div>
           </div>
           <button
             onClick={() => setMobileMenuOpen(false)}
             data-testid="btn-close-mobile-menu"
-            className="md:hidden text-gray-400 hover:text-white p-1"
+            className="md:hidden text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white p-1"
             aria-label="Close menu"
           >
             ✕
@@ -79,12 +79,12 @@ export default function Sidebar() {
         </div>
 
         {/* Progress Bar Widget in Sidebar */}
-        <div className="px-4 py-3 bg-gray-950/60 dark:bg-slate-950/60 border-b border-gray-800 dark:border-slate-800">
+        <div className="px-4 py-3 bg-gray-200/60 dark:bg-slate-950/60 border-b border-gray-200 dark:border-slate-800">
           <div className="flex justify-between items-center text-[11px] mb-1.5">
-            <span className="text-gray-400 font-medium">Curriculum Progress</span>
+            <span className="text-gray-600 dark:text-gray-400 font-medium">Curriculum Progress</span>
             <span className="font-mono text-emerald-400 font-bold">{progress}%</span>
           </div>
-          <div className="w-full bg-gray-800 rounded-full h-1.5 overflow-hidden">
+          <div className="w-full bg-gray-300 dark:bg-gray-800 rounded-full h-1.5 overflow-hidden">
             <div
               className="bg-emerald-500 h-1.5 rounded-full transition-all duration-300"
               style={{ width: `${progress}%` }}
@@ -105,14 +105,14 @@ export default function Sidebar() {
                 className={`flex items-center justify-between px-4 py-2 text-sm transition-colors ${
                   active
                     ? "bg-indigo-600 text-white font-medium"
-                    : "text-gray-300 hover:bg-gray-800 dark:hover:bg-slate-800 hover:text-white"
+                    : "text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-slate-800 hover:text-gray-900 dark:hover:text-white"
                 }`}
               >
                 <div className="flex items-center gap-2 truncate">
                   {completed ? (
                     <span className="text-emerald-400 text-xs shrink-0">✓</span>
                   ) : (
-                    <span className="w-2.5 h-2.5 rounded-full border border-gray-600 shrink-0" />
+                    <span className="w-2.5 h-2.5 rounded-full border border-gray-400 dark:border-gray-600 shrink-0" />
                   )}
                   <span className="truncate">{s.label}</span>
                 </div>
@@ -126,7 +126,7 @@ export default function Sidebar() {
           })}
         </nav>
 
-        <div className="p-3 border-t border-gray-800 dark:border-slate-800 text-[11px] text-gray-500 text-center flex items-center justify-between px-4">
+        <div className="p-3 border-t border-gray-200 dark:border-slate-800 text-[11px] text-gray-500 dark:text-gray-500 text-center flex items-center justify-between px-4">
           <span className="font-mono">localhost:3000</span>
           <span className="text-indigo-400 font-semibold">Ready</span>
         </div>

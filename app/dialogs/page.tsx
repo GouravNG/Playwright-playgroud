@@ -5,7 +5,7 @@ function HintPanel({ code }: { code: string }) {
   const [open, setOpen] = useState(false);
   return (
     <div className="mt-3">
-      <button onClick={() => setOpen((v) => !v)} className="text-xs text-indigo-600 hover:underline font-medium">
+      <button onClick={() => setOpen((v) => !v)} className="text-xs text-indigo-600 dark:text-indigo-400 hover:underline font-medium">
         {open ? "🙈 Hide hint" : "💡 Show Playwright code"}
       </button>
       {open && (
@@ -19,8 +19,8 @@ function WidgetCard({ title, testId, children, hint }: {
   title: string; testId?: string; children: React.ReactNode; hint: string;
 }) {
   return (
-    <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm" data-testid={testId}>
-      <h3 className="font-semibold text-gray-700 text-sm mb-3 border-b pb-2">{title}</h3>
+    <div className="bg-white dark:bg-slate-800 rounded-xl border border-gray-200 dark:border-slate-700 p-5 shadow-sm" data-testid={testId}>
+      <h3 className="font-semibold text-gray-700 dark:text-slate-200 text-sm mb-3 border-b dark:border-slate-700 pb-2">{title}</h3>
       {children}
       <HintPanel code={hint} />
     </div>
@@ -46,9 +46,9 @@ export default function DialogsPage() {
 
   return (
     <div className="max-w-5xl mx-auto space-y-6">
-      <div className="bg-purple-50 border border-purple-200 rounded-xl p-4">
-        <h2 className="font-bold text-purple-800 mb-1">🪟 Dialogs & Popups</h2>
-        <p className="text-sm text-purple-700">
+      <div className="bg-purple-50 dark:bg-purple-950/40 border border-purple-200 dark:border-purple-800 rounded-xl p-4">
+        <h2 className="font-bold text-purple-800 dark:text-purple-300 mb-1">🪟 Dialogs &amp; Popups</h2>
+        <p className="text-sm text-purple-700 dark:text-purple-400">
           Practice handling JS alerts, confirms, prompts, modals, toasts, tooltips, and new-tab links.
         </p>
       </div>
@@ -77,7 +77,7 @@ export default function DialogsPage() {
               Trigger Alert
             </button>
             {alertResult && (
-              <div data-testid="alert-result" className="text-xs text-green-600 bg-green-50 px-3 py-1 rounded">
+              <div data-testid="alert-result" className="text-xs text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-950/40 px-3 py-1 rounded">
                 ✓ {alertResult}
               </div>
             )}
@@ -98,7 +98,7 @@ export default function DialogsPage() {
             </button>
             {confirmResult && (
               <div data-testid="confirm-result"
-                className={`text-xs px-3 py-1 rounded ${confirmResult.startsWith("Confirmed") ? "text-red-600 bg-red-50" : "text-green-600 bg-green-50"}`}>
+                className={`text-xs px-3 py-1 rounded ${confirmResult.startsWith("Confirmed") ? "text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-950/40" : "text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-950/40"}`}>
                 ✓ {confirmResult}
               </div>
             )}
@@ -119,7 +119,7 @@ export default function DialogsPage() {
             </button>
             {promptResult && (
               <div data-testid="prompt-result"
-                className={`text-xs px-3 py-1 rounded ${promptResult.startsWith("Applied") ? "text-green-600 bg-green-50" : "text-gray-600 bg-gray-100"}`}>
+                className={`text-xs px-3 py-1 rounded ${promptResult.startsWith("Applied") ? "text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-950/40" : "text-gray-600 dark:text-slate-400 bg-gray-100 dark:bg-slate-700"}`}>
                 {promptResult}
               </div>
             )}
@@ -142,7 +142,7 @@ export default function DialogsPage() {
           hint={`await page.getByTestId('btn-open-drawer').click();\nawait expect(page.getByTestId('filter-drawer')).toBeVisible();\nawait page.getByTestId('btn-close-drawer').click();\nawait expect(page.getByTestId('filter-drawer')).toBeHidden();`}>
           <div className="space-y-3">
             <button data-testid="btn-open-drawer" onClick={() => setDrawerOpen(true)}
-              className="border border-indigo-600 text-indigo-600 text-sm px-4 py-2 rounded-lg hover:bg-indigo-50">
+              className="border border-indigo-600 dark:border-indigo-500 text-indigo-600 dark:text-indigo-400 text-sm px-4 py-2 rounded-lg hover:bg-indigo-50 dark:hover:bg-indigo-950/40">
               Open Filter Drawer
             </button>
           </div>
@@ -156,18 +156,18 @@ export default function DialogsPage() {
             className="bg-gray-800 text-white text-sm px-4 py-2 rounded-lg hover:bg-gray-900">
             Save to Wishlist ♡
           </button>
-          <p className="text-xs text-gray-400 mt-2">Toast appears top-right and auto-hides after 3s</p>
+          <p className="text-xs text-gray-400 dark:text-slate-500 mt-2">Toast appears top-right and auto-hides after 3s</p>
         </WidgetCard>
 
         {/* Tooltip */}
         <WidgetCard title="7. Tooltip — hover to reveal" testId="widget-tooltip"
           hint={`await page.getByTestId('shipping-info-icon').hover();\nawait expect(page.getByTestId('shipping-tooltip')).toBeVisible();\nawait expect(page.getByTestId('shipping-tooltip')).toContainText('Free shipping');\nawait page.mouse.move(0, 0); // move away\nawait expect(page.getByTestId('shipping-tooltip')).toBeHidden();`}>
           <div className="relative inline-flex items-center gap-2">
-            <span className="text-sm text-gray-700">Shipping Info</span>
+            <span className="text-sm text-gray-700 dark:text-slate-200">Shipping Info</span>
             <span data-testid="shipping-info-icon"
               onMouseEnter={() => setTooltipVisible(true)}
               onMouseLeave={() => setTooltipVisible(false)}
-              className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-blue-100 text-blue-600 text-xs font-bold cursor-help">
+              className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-blue-100 dark:bg-blue-950/40 text-blue-600 dark:text-blue-400 text-xs font-bold cursor-help">
               ℹ
             </span>
             {tooltipVisible && (
@@ -184,10 +184,10 @@ export default function DialogsPage() {
           hint={`// Wait for new page/tab to open\nconst [newPage] = await Promise.all([\n  context.waitForEvent('page'),\n  page.getByTestId('btn-open-terms').click(),\n]);\nawait newPage.waitForLoadState();\nawait expect(newPage).toHaveURL(/terms/);\nawait expect(newPage.getByRole('heading')).toContainText('Terms');`}>
           <a data-testid="btn-open-terms"
             href="/terms" target="_blank" rel="noreferrer"
-            className="inline-block bg-gray-100 text-gray-700 text-sm px-4 py-2 rounded-lg hover:bg-gray-200 border border-gray-300">
-            Terms & Conditions ↗
+            className="inline-block bg-gray-100 dark:bg-slate-700 text-gray-700 dark:text-slate-200 text-sm px-4 py-2 rounded-lg hover:bg-gray-200 dark:hover:bg-slate-600 border border-gray-300 dark:border-slate-600">
+            Terms &amp; Conditions ↗
           </a>
-          <p className="text-xs text-gray-400 mt-2">Opens in a new tab — use <code>context.waitForEvent(&apos;page&apos;)</code></p>
+          <p className="text-xs text-gray-400 dark:text-slate-500 mt-2">Opens in a new tab — use <code>context.waitForEvent(&apos;page&apos;)</code></p>
         </WidgetCard>
 
       </div>
@@ -198,24 +198,24 @@ export default function DialogsPage() {
           className="fixed inset-0 bg-black/40 flex items-center justify-center z-50"
           onClick={(e) => { if (e.target === e.currentTarget) setModalOpen(false); }}>
           <div data-testid="review-modal"
-            className="bg-white rounded-2xl shadow-xl p-6 max-w-md w-full mx-4">
+            className="bg-white dark:bg-slate-800 rounded-2xl shadow-xl p-6 max-w-md w-full mx-4 border border-gray-200 dark:border-slate-700">
             <div className="flex items-center justify-between mb-4">
-              <h3 data-testid="modal-title" className="font-bold text-lg text-gray-800">Review Your Order</h3>
+              <h3 data-testid="modal-title" className="font-bold text-lg text-gray-800 dark:text-slate-100">Review Your Order</h3>
               <button data-testid="btn-close-modal" onClick={() => setModalOpen(false)}
-                className="text-gray-400 hover:text-gray-600 text-xl font-bold leading-none">×</button>
+                className="text-gray-400 dark:text-slate-500 hover:text-gray-600 dark:hover:text-slate-300 text-xl font-bold leading-none">×</button>
             </div>
-            <div className="space-y-3 text-sm text-gray-700">
-              <div className="flex justify-between py-2 border-b border-gray-100">
+            <div className="space-y-3 text-sm text-gray-700 dark:text-slate-200">
+              <div className="flex justify-between py-2 border-b border-gray-100 dark:border-slate-700">
                 <span>Wireless Headphones × 1</span>
                 <strong>$79.99</strong>
               </div>
-              <div className="flex justify-between py-2 border-b border-gray-100">
+              <div className="flex justify-between py-2 border-b border-gray-100 dark:border-slate-700">
                 <span>Running Shoes × 2</span>
                 <strong>$119.98</strong>
               </div>
               <div className="flex justify-between pt-2 font-bold">
                 <span>Total</span>
-                <span className="text-green-700">$199.97</span>
+                <span className="text-green-700 dark:text-green-400">$199.97</span>
               </div>
             </div>
             <div className="mt-5 flex gap-3">
@@ -225,7 +225,7 @@ export default function DialogsPage() {
                 Confirm Order
               </button>
               <button data-testid="btn-cancel-modal" onClick={() => setModalOpen(false)}
-                className="flex-1 border border-gray-300 text-gray-700 py-2.5 rounded-xl text-sm hover:bg-gray-50">
+                className="flex-1 border border-gray-300 dark:border-slate-600 text-gray-700 dark:text-slate-200 py-2.5 rounded-xl text-sm hover:bg-gray-50 dark:hover:bg-slate-700">
                 Cancel
               </button>
             </div>
@@ -238,25 +238,25 @@ export default function DialogsPage() {
         <>
           <div className="fixed inset-0 bg-black/30 z-40" onClick={() => setDrawerOpen(false)} />
           <div data-testid="filter-drawer"
-            className="fixed right-0 top-0 h-full w-72 bg-white shadow-2xl z-50 p-6">
+            className="fixed right-0 top-0 h-full w-72 bg-white dark:bg-slate-800 shadow-2xl z-50 p-6 border-l border-gray-200 dark:border-slate-700">
             <div className="flex items-center justify-between mb-6">
-              <h3 className="font-bold text-gray-800">Filter Orders</h3>
+              <h3 className="font-bold text-gray-800 dark:text-slate-100">Filter Orders</h3>
               <button data-testid="btn-close-drawer" onClick={() => setDrawerOpen(false)}
-                className="text-gray-400 hover:text-gray-600 text-xl font-bold">×</button>
+                className="text-gray-400 dark:text-slate-500 hover:text-gray-600 dark:hover:text-slate-300 text-xl font-bold">×</button>
             </div>
             <div className="space-y-4 text-sm">
               <div>
-                <p className="font-medium text-gray-700 mb-2">Status</p>
+                <p className="font-medium text-gray-700 dark:text-slate-200 mb-2">Status</p>
                 {["Delivered", "Shipped", "Processing", "Cancelled"].map((s) => (
-                  <label key={s} className="flex items-center gap-2 py-1 cursor-pointer">
+                  <label key={s} className="flex items-center gap-2 py-1 cursor-pointer text-gray-700 dark:text-slate-300">
                     <input type="checkbox" className="rounded text-indigo-600" />
                     <span>{s}</span>
                   </label>
                 ))}
               </div>
               <div>
-                <p className="font-medium text-gray-700 mb-2">Date Range</p>
-                <input type="date" className="w-full border border-gray-300 rounded px-3 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-400" />
+                <p className="font-medium text-gray-700 dark:text-slate-200 mb-2">Date Range</p>
+                <input type="date" className="w-full border border-gray-300 dark:border-slate-700 rounded px-3 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-400 bg-white dark:bg-slate-800 text-gray-800 dark:text-slate-100 dark:placeholder:text-slate-500" />
               </div>
             </div>
             <button className="mt-6 w-full bg-indigo-600 text-white py-2 rounded-xl text-sm hover:bg-indigo-700" onClick={() => setDrawerOpen(false)}>

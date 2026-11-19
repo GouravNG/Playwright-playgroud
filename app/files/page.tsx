@@ -5,7 +5,7 @@ function HintPanel({ code }: { code: string }) {
   const [open, setOpen] = useState(false);
   return (
     <div className="mt-3">
-      <button onClick={() => setOpen((v) => !v)} className="text-xs text-indigo-600 hover:underline font-medium">
+      <button onClick={() => setOpen((v) => !v)} className="text-xs text-indigo-600 dark:text-indigo-400 hover:underline font-medium">
         {open ? "🙈 Hide hint" : "💡 Show Playwright code"}
       </button>
       {open && (
@@ -19,8 +19,8 @@ function WidgetCard({ title, testId, children, hint }: {
   title: string; testId?: string; children: React.ReactNode; hint: string;
 }) {
   return (
-    <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm" data-testid={testId}>
-      <h3 className="font-semibold text-gray-700 text-sm mb-3 border-b pb-2">{title}</h3>
+    <div className="bg-white dark:bg-slate-800 rounded-xl border border-gray-200 dark:border-slate-700 p-5 shadow-sm" data-testid={testId}>
+      <h3 className="font-semibold text-gray-700 dark:text-slate-200 text-sm mb-3 border-b dark:border-slate-700 pb-2">{title}</h3>
       {children}
       <HintPanel code={hint} />
     </div>
@@ -46,9 +46,9 @@ export default function FilesPage() {
 
   return (
     <div className="max-w-5xl mx-auto space-y-6">
-      <div className="bg-amber-50 border border-amber-200 rounded-xl p-4">
-        <h2 className="font-bold text-amber-800 mb-1">📂 File Operations</h2>
-        <p className="text-sm text-amber-700">
+      <div className="bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800 rounded-xl p-4">
+        <h2 className="font-bold text-amber-800 dark:text-amber-300 mb-1">📂 File Operations</h2>
+        <p className="text-sm text-amber-700 dark:text-amber-400">
           Practice <code>locator.setInputFiles()</code> for single and multiple files, handle dynamic file choosers (<code>page.waitForEvent(&apos;filechooser&apos;)</code>), and verify file downloads with <code>page.waitForEvent(&apos;download&apos;)</code>.
         </p>
       </div>
@@ -58,7 +58,7 @@ export default function FilesPage() {
         <WidgetCard title="1. Single File Upload (KYC ID Proof)" testId="widget-single-upload"
           hint={`// Set single file on input[type=file]\nawait page.getByTestId('input-kyc-doc').setInputFiles('tests/fixtures/sample-id.pdf');\nawait expect(page.getByTestId('uploaded-single-name')).toHaveText('sample-id.pdf');`}>
           <div className="space-y-3">
-            <label className="text-xs font-medium text-gray-700 block">Upload ID Document (PDF / Image)</label>
+            <label className="text-xs font-medium text-gray-700 dark:text-slate-300 block">Upload ID Document (PDF / Image)</label>
             <input
               type="file"
               data-testid="input-kyc-doc"
@@ -66,10 +66,10 @@ export default function FilesPage() {
                 const file = e.target.files?.[0];
                 if (file) setSingleFileName(file.name);
               }}
-              className="text-xs text-gray-600 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-medium file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100"
+              className="text-xs text-gray-600 dark:text-slate-400 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-medium file:bg-indigo-50 dark:file:bg-indigo-950/60 file:text-indigo-700 dark:file:text-indigo-300 hover:file:bg-indigo-100"
             />
             {singleFileName && (
-              <div className="text-xs bg-emerald-50 text-emerald-700 p-2 rounded border border-emerald-200">
+              <div className="text-xs bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-400 p-2 rounded border border-emerald-200 dark:border-emerald-800">
                 Uploaded: <strong data-testid="uploaded-single-name">{singleFileName}</strong>
               </div>
             )}
@@ -80,7 +80,7 @@ export default function FilesPage() {
         <WidgetCard title="2. Multi-File Upload" testId="widget-multi-upload"
           hint={`// Set multiple files array\nawait page.getByTestId('input-multi-docs').setInputFiles([\n  'tests/fixtures/doc1.pdf',\n  'tests/fixtures/doc2.pdf'\n]);\nawait expect(page.getByTestId('uploaded-multi-list')).toContainText('doc1.pdf');`}>
           <div className="space-y-3">
-            <label className="text-xs font-medium text-gray-700 block">Select Multiple Invoices / Reports</label>
+            <label className="text-xs font-medium text-gray-700 dark:text-slate-300 block">Select Multiple Invoices / Reports</label>
             <input
               type="file"
               multiple
@@ -90,13 +90,13 @@ export default function FilesPage() {
                   setMultiFiles(Array.from(e.target.files).map((f) => f.name));
                 }
               }}
-              className="text-xs text-gray-600 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-medium file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100"
+              className="text-xs text-gray-600 dark:text-slate-400 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-medium file:bg-indigo-50 dark:file:bg-indigo-950/60 file:text-indigo-700 dark:file:text-indigo-300 hover:file:bg-indigo-100"
             />
             {multiFiles.length > 0 && (
-              <div data-testid="uploaded-multi-list" className="text-xs space-y-1 bg-gray-50 p-2 rounded border">
-                <span className="font-semibold text-gray-600">Selected {multiFiles.length} files:</span>
+              <div data-testid="uploaded-multi-list" className="text-xs space-y-1 bg-gray-50 dark:bg-slate-900 p-2 rounded border border-gray-200 dark:border-slate-700">
+                <span className="font-semibold text-gray-600 dark:text-slate-400">Selected {multiFiles.length} files:</span>
                 {multiFiles.map((n, i) => (
-                  <div key={i} className="text-indigo-600 font-mono text-[11px]">📄 {n}</div>
+                  <div key={i} className="text-indigo-600 dark:text-indigo-400 font-mono text-[11px]">📄 {n}</div>
                 ))}
               </div>
             )}
@@ -124,19 +124,19 @@ export default function FilesPage() {
             <div
               data-testid="dropzone-click-area"
               onClick={() => document.getElementById("hidden-drop-input")?.click()}
-              className="border-2 border-dashed border-gray-300 rounded-xl p-5 text-center cursor-pointer hover:border-indigo-500 bg-gray-50/50 hover:bg-indigo-50/20 transition-all"
+              className="border-2 border-dashed border-gray-300 dark:border-slate-600 rounded-xl p-5 text-center cursor-pointer hover:border-indigo-500 bg-gray-50/50 dark:bg-slate-900/50 hover:bg-indigo-50/20 transition-all"
             >
               <span className="text-2xl block mb-1">📤</span>
-              <p className="text-xs text-gray-600 font-medium">Click here to open File Dialog or drop file</p>
-              <p className="text-[11px] text-gray-400 mt-1">Accepts images & receipts</p>
+              <p className="text-xs text-gray-600 dark:text-slate-300 font-medium">Click here to open File Dialog or drop file</p>
+              <p className="text-[11px] text-gray-400 dark:text-slate-500 mt-1">Accepts images & receipts</p>
             </div>
             {dropzoneFile && (
-              <div className="text-xs bg-indigo-50 text-indigo-700 p-2 rounded border border-indigo-200 flex items-center justify-between">
+              <div className="text-xs bg-indigo-50 dark:bg-indigo-950/40 text-indigo-700 dark:text-indigo-300 p-2 rounded border border-indigo-200 dark:border-indigo-800 flex items-center justify-between">
                 <span>File: <strong data-testid="dropzone-file-name">{dropzoneFile}</strong></span>
               </div>
             )}
             {imagePreview && (
-              <div className="p-2 border rounded bg-white flex justify-center">
+              <div className="p-2 border border-gray-200 dark:border-slate-700 rounded bg-white dark:bg-slate-900 flex justify-center">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src={imagePreview} alt="Uploaded receipt preview" data-testid="receipt-preview-img" className="max-h-24 rounded" />
               </div>
@@ -148,7 +148,7 @@ export default function FilesPage() {
         <WidgetCard title="4. File Download & Verification" testId="widget-file-download"
           hint={`// Wait for browser download event and inspect saved file\nconst downloadPromise = page.waitForEvent('download');\nawait page.getByTestId('btn-download-csv').click();\nconst download = await downloadPromise;\nexpect(download.suggestedFilename()).toBe('orders-export.csv');\nconst path = await download.path();\nconsole.log('Saved to:', path);`}>
           <div className="space-y-3">
-            <p className="text-xs text-gray-600">
+            <p className="text-xs text-gray-600 dark:text-slate-400">
               Trigger instant client-side file export for orders data:
             </p>
             <button
@@ -158,7 +158,7 @@ export default function FilesPage() {
             >
               📥 Download Orders CSV (orders-export.csv)
             </button>
-            <p className="text-[11px] text-gray-400">
+            <p className="text-[11px] text-gray-400 dark:text-slate-500">
               Playwright intercepts the download without needing OS native folder prompts.
             </p>
           </div>

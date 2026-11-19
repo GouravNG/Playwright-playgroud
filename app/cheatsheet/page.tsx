@@ -26,9 +26,9 @@ export default function CheatSheetPage() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
         {/* CLI Reference */}
-        <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm space-y-3">
-          <div className="flex items-center justify-between border-b pb-2">
-            <h3 className="font-semibold text-gray-800 text-sm">⚡ CLI Commands & Debugging</h3>
+        <div className="bg-white dark:bg-slate-800 rounded-xl border border-gray-200 dark:border-slate-700 p-5 shadow-sm space-y-3">
+          <div className="flex items-center justify-between border-b border-gray-100 dark:border-slate-700 pb-2">
+            <h3 className="font-semibold text-gray-800 dark:text-slate-100 text-sm">⚡ CLI Commands & Debugging</h3>
             <span className="text-[10px] bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-mono">Terminal</span>
           </div>
           <pre className="text-xs bg-slate-950 text-emerald-400 p-3 rounded-lg font-mono overflow-x-auto leading-relaxed">
@@ -59,9 +59,9 @@ npx playwright show-trace trace.zip`}
         </div>
 
         {/* User-Facing Locators */}
-        <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm space-y-3">
-          <div className="flex items-center justify-between border-b pb-2">
-            <h3 className="font-semibold text-gray-800 text-sm">🎯 Modern Locators (Best Practice)</h3>
+        <div className="bg-white dark:bg-slate-800 rounded-xl border border-gray-200 dark:border-slate-700 p-5 shadow-sm space-y-3">
+          <div className="flex items-center justify-between border-b border-gray-100 dark:border-slate-700 pb-2">
+            <h3 className="font-semibold text-gray-800 dark:text-slate-100 text-sm">🎯 Modern Locators (Best Practice)</h3>
             <span className="text-[10px] bg-indigo-50 text-indigo-700 px-2 py-0.5 rounded font-mono">Page API</span>
           </div>
           <pre className="text-xs bg-slate-950 text-sky-300 p-3 rounded-lg font-mono overflow-x-auto leading-relaxed">
@@ -94,9 +94,9 @@ page.getByRole('listitem').nth(0)`}
         </div>
 
         {/* Actions Arena */}
-        <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm space-y-3">
-          <div className="flex items-center justify-between border-b pb-2">
-            <h3 className="font-semibold text-gray-800 text-sm">🖱️ Interaction & Action Methods</h3>
+        <div className="bg-white dark:bg-slate-800 rounded-xl border border-gray-200 dark:border-slate-700 p-5 shadow-sm space-y-3">
+          <div className="flex items-center justify-between border-b border-gray-100 dark:border-slate-700 pb-2">
+            <h3 className="font-semibold text-gray-800 dark:text-slate-100 text-sm">🖱️ Interaction & Action Methods</h3>
             <span className="text-[10px] bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded font-mono">Actions</span>
           </div>
           <pre className="text-xs bg-slate-950 text-amber-300 p-3 rounded-lg font-mono overflow-x-auto leading-relaxed">
@@ -123,9 +123,9 @@ await locator.scrollIntoViewIfNeeded()`}
         </div>
 
         {/* Web Assertions */}
-        <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm space-y-3">
-          <div className="flex items-center justify-between border-b pb-2">
-            <h3 className="font-semibold text-gray-800 text-sm">✅ Web-First Assertions (Auto-Retrying)</h3>
+        <div className="bg-white dark:bg-slate-800 rounded-xl border border-gray-200 dark:border-slate-700 p-5 shadow-sm space-y-3">
+          <div className="flex items-center justify-between border-b border-gray-100 dark:border-slate-700 pb-2">
+            <h3 className="font-semibold text-gray-800 dark:text-slate-100 text-sm">✅ Web-First Assertions (Auto-Retrying)</h3>
             <span className="text-[10px] bg-pink-50 text-pink-700 px-2 py-0.5 rounded font-mono">expect()</span>
           </div>
           <pre className="text-xs bg-slate-950 text-pink-300 p-3 rounded-lg font-mono overflow-x-auto leading-relaxed">
@@ -153,9 +153,9 @@ expect.soft(locator).toBeVisible()`}
         </div>
 
         {/* Network & Mocking */}
-        <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm space-y-3">
-          <div className="flex items-center justify-between border-b pb-2">
-            <h3 className="font-semibold text-gray-800 text-sm">🌐 Network Routing & API Interception</h3>
+        <div className="bg-white dark:bg-slate-800 rounded-xl border border-gray-200 dark:border-slate-700 p-5 shadow-sm space-y-3">
+          <div className="flex items-center justify-between border-b border-gray-100 dark:border-slate-700 pb-2">
+            <h3 className="font-semibold text-gray-800 dark:text-slate-100 text-sm">🌐 Network Routing & API Interception</h3>
             <span className="text-[10px] bg-blue-50 text-blue-700 px-2 py-0.5 rounded font-mono">Routing</span>
           </div>
           <pre className="text-xs bg-slate-950 text-blue-300 p-3 rounded-lg font-mono overflow-x-auto leading-relaxed">
@@ -184,9 +184,9 @@ await page.waitForResponse(r => r.url().includes('/orders'));`}
         </div>
 
         {/* Frames, Dialogs, Downloads */}
-        <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm space-y-3">
-          <div className="flex items-center justify-between border-b pb-2">
-            <h3 className="font-semibold text-gray-800 text-sm">🪟 Frames, Dialogs & Events</h3>
+        <div className="bg-white dark:bg-slate-800 rounded-xl border border-gray-200 dark:border-slate-700 p-5 shadow-sm space-y-3">
+          <div className="flex items-center justify-between border-b border-gray-100 dark:border-slate-700 pb-2">
+            <h3 className="font-semibold text-gray-800 dark:text-slate-100 text-sm">🪟 Frames, Dialogs & Events</h3>
             <span className="text-[10px] bg-purple-50 text-purple-700 px-2 py-0.5 rounded font-mono">Advanced</span>
           </div>
           <pre className="text-xs bg-slate-950 text-purple-300 p-3 rounded-lg font-mono overflow-x-auto leading-relaxed">
@@ -213,9 +213,9 @@ await download.saveAs('/path/file.csv');`}
       </div>
 
       {/* Starter Config */}
-      <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm space-y-3">
-        <div className="flex items-center justify-between border-b pb-2">
-          <h3 className="font-semibold text-gray-800 text-sm">⚙️ Standard Production playwright.config.ts</h3>
+      <div className="bg-white dark:bg-slate-800 rounded-xl border border-gray-200 dark:border-slate-700 p-5 shadow-sm space-y-3">
+        <div className="flex items-center justify-between border-b border-gray-100 dark:border-slate-700 pb-2">
+          <h3 className="font-semibold text-gray-800 dark:text-slate-100 text-sm">⚙️ Standard Production playwright.config.ts</h3>
           <button
             onClick={() => copyCode("config", `import { defineConfig, devices } from '@playwright/test';
 
