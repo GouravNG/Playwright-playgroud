@@ -147,6 +147,17 @@ const sections = [
     badgeColor: "bg-teal-100 text-teal-700 dark:bg-teal-900/50 dark:text-teal-300",
   },
   {
+    href: "/challenges",
+    icon: "🎯",
+    title: "Advanced Challenges Arena",
+    desc: "Real-world edge cases: Canvas vector signing, cascading dropdowns, infinite scroll, 6-box OTP, multi-tab sync, flaky DOM race conditions and rich text editors.",
+    badge: "Mastery",
+    topics: ["canvas drawing", "cascading combobox", "infinite scroll", "OTP keyboard", "multi-tab broadcast", "flaky DOM", "contenteditable"],
+    color: "border-fuchsia-500",
+    bgColor: "bg-fuchsia-50/50 dark:bg-fuchsia-950/20",
+    badgeColor: "bg-fuchsia-100 text-fuchsia-800 dark:bg-fuchsia-900/50 dark:text-fuchsia-300",
+  },
+  {
     href: "/advanced",
     icon: "⚡",
     title: "Advanced Topics",

@@ -19,6 +19,7 @@ const sections = [
   { href: "/visual", label: "🎨 Visual Testing", badge: "Advanced" },
   { href: "/accessibility", label: "♿ Accessibility", badge: "Advanced" },
   { href: "/slow-loading", label: "⏳ Slow Loading & Async", badge: "Advanced" },
+  { href: "/challenges", label: "🎯 Advanced Challenges", badge: "Mastery" },
   { href: "/advanced", label: "⚡ Advanced Topics", badge: "Advanced" },
   { href: "/test-runner", label: "🧪 Test Runner & Hooks", badge: "Mastery" },
   { href: "/cli-codegen", label: "⚙️ Codegen & CLI Flags", badge: "Mastery" },

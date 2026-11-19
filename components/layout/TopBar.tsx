@@ -17,6 +17,7 @@ const titles: Record<string, string> = {
   "/visual": "🎨 Visual Testing",
   "/accessibility": "♿ Accessibility",
   "/slow-loading": "⏳ Async & Slow-Loading Lab",
+  "/challenges": "🎯 Advanced UI Automation Challenges",
   "/advanced": "⚡ Advanced Topics",
   "/test-runner": "🧪 Test Runner & Hooks",
   "/cli-codegen": "⚙️ Codegen & CLI Flags",
